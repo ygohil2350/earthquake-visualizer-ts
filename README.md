@@ -69,6 +69,7 @@ Before running this app, make sure you have the following installed:
 
 ### Folder Structure
 
+```
 earthquake-visualizer/
 │
 ├── public/ # Public assets
@@ -85,6 +86,7 @@ earthquake-visualizer/
 ├── package.json # Project metadata and dependencies
 ├── tsconfig.json # TypeScript configuration
 └── README.md # This README file
+```
 
 ### How It Works
 
