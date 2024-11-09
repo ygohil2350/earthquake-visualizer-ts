@@ -1,46 +1,157 @@
-# Getting Started with Create React App
+# Earthquake Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React TypeScript application that visualizes recent earthquake data on an interactive map. The app fetches earthquake data from the USGS Earthquake API and displays markers on a Leaflet map based on the earthquake's location and magnitude.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Displays real-time earthquake data on a world map.
+- Earthquakes are marked on the map using color-coded markers based on their magnitude:
+  - Green for low magnitude (less than 4)
+  - Orange for medium magnitude (4 - 4.9)
+  - Red for high magnitude (5 or greater)
+- Interactive map powered by [Leaflet.js](https://leafletjs.com/) and styled with OpenStreetMap tiles.
+- Earthquake details are shown in a popup when a marker is clicked, including:
+  - Location of the earthquake.
+  - Magnitude.
+  - Time of the earthquake.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Before running this app, make sure you have the following installed:
 
-### `npm test`
+- [Node.js](https://nodejs.org/) (Recommended version: 16.x or higher)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. Clone the repository to your local machine:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   git clone https://github.com/yourusername/earthquake-visualizer.git
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the project directory:
+   ```bash
+   cd earthquake-visualizer
+   ```
+3. Install the required dependencies:
+   Using npm:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+   Or using Yarn:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   ```bash
+   yarn install
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Running the Application
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Start the development server:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   Using npm:
 
-## Learn More
+   ```bash
+   npm start
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   Or using Yarn:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```bash
+   yarn start
+   ```
+
+2. Open your browser and visit http://localhost:3000 to view the application.
+
+### Folder Structure
+
+earthquake-visualizer/
+│
+├── public/ # Public assets
+│ ├── index.html # HTML template
+│ └── ...
+│
+├── src/ # Source code
+│ ├── components/ # React components (e.g., EarthquakeVisualizer.tsx)
+│ ├── App.tsx # Main App component
+│ ├── index.tsx # Entry point for React app
+│ └── ...
+│
+├── .gitignore # Git ignore file
+├── package.json # Project metadata and dependencies
+├── tsconfig.json # TypeScript configuration
+└── README.md # This README file
+
+### How It Works
+
+`EarthquakeVisualizer.tsx`
+The main component of the app, EarthquakeVisualizer, does the following:
+
+1. State Management:
+   - `earthquakes`: Stores the fetched earthquake data.
+   - `loading`: Indicates whether the data is still being fetched.
+   - `error`: Stores error messages if the data fetch fails.
+2. Data Fetching :
+   - The app fetches earthquake data from the USGS Earthquake [API](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson) when the component mounts.
+   - The data is stored in the `earthquakes` state.
+3. Displaying Data:
+   - The app uses the Leaflet library to display a map with earthquake markers.
+   - Each earthquake marker is color-coded based on its magnitude using the `getMarkerIcon` function:
+     - Green for magnitude < 4.
+     - Orange for magnitude 4 - 4.9.
+     - Red for magnitude >= 5.
+4. Popup Details:
+   - When a marker is clicked, a popup appears with the following details:
+     - Location (place).
+     - Magnitude.
+     - Time of occurrence (formatted using JavaScript's toLocaleString() method).
+5. Error Handling:
+   - If there's an error fetching the earthquake data, an error message is displayed.
+
+### Dependencies
+
+- `react`: The React library.
+- `react-dom`: Provides DOM rendering support for React.
+- `react-scripts`: Scripts and configuration used by Create React App.
+- `axios`: A promise-based HTTP client for making requests to the USGS Earthquake API.
+- `react-leaflet`: A React wrapper for Leaflet.js, used to create interactive maps.
+- `leaflet`: A library for creating interactive maps.
+- `tailwindcss`: A utility-first CSS framework used for styling.
+
+### Styling
+
+The application uses [Tailwind CSS](https://tailwindcss.com/) for utility-based styling. The map container and loading/error messages are styled with Tailwind classes.
+
+### Contributing
+
+Contributions are welcome! If you'd like to improve this project, please fork the repository and create a pull request.
+
+1. Fork the repo.
+2. Create a new branch
+
+```bash
+git checkout -b feature/your-feature
+```
+
+3. Make your changes.
+4. Commit your changes
+
+```bash
+git commit -am 'Add new feature'
+```
+
+5. Push to the branch
+
+```bash
+git push origin feature/your-feature
+```
+
+6. Create a new pull request.
+
+#### License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
